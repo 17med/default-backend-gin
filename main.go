@@ -15,6 +15,7 @@ func main() {
 	r := gin.Default()
 	Router.MainRoute(r)
 	TestModel.InsirtTestModel("test","test")
+	TestModel.GetAllTestModel()
 	r.Run(":1234")
 	
 

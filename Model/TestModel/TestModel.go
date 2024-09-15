@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -40,4 +41,18 @@ func InsirtTestModel(name string, password string) {
 		}
 	
 	
+}
+
+func GetAllTestModel(){
+	coll := DB.GetClient().Database("test").Collection("testuser")
+	cursor, err := coll.Find(context.TODO(), bson.D{})
+if err != nil {
+	panic(err)
+}
+
+var results []testModel
+if err = cursor.All(context.TODO(), &results); err != nil {
+	panic(err)
+}
+println(len(results))
 }
