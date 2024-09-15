@@ -9,50 +9,46 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-
 type testModel struct {
-	id primitive.ObjectID `bson:"_id,omitempty"`
-	Name string  `bson:"name"`
-	Password string  `bson:"password"`
-
+	id       primitive.ObjectID `bson:"_id,omitempty"`
+	Name     string             `bson:"name"`
+	Password string             `bson:"password"`
 }
-
 
 func InsirtTestModel(name string, password string) {
 	fmt.Println("Insert Test Model")
 
 	valx := testModel{
-		id:       primitive.NewObjectID(),
+		id: primitive.NewObjectID(),
 
-		Name:name,Password:password}
+		Name: name, Password: password}
 
-		result, err :=DB.GetClient().Database("test").Collection("testuser").InsertOne(context.TODO(),valx)
+	result, err := DB.GetClient().Database("test").Collection("testuser").InsertOne(context.TODO(), valx)
 
-		if err != nil {
+	if err != nil {
 
-			panic(err)
+		panic(err)
 
-		}
+	}
 
-		if(result.InsertedID==nil){
+	if result.InsertedID == nil {
 
-			panic("Insert Fail")
+		panic("Insert Fail")
 
-		}
-	
-	
+	}
+
 }
 
-func GetAllTestModel(){
+func GetAllTestModel() {
 	coll := DB.GetClient().Database("test").Collection("testuser")
 	cursor, err := coll.Find(context.TODO(), bson.D{})
-if err != nil {
-	panic(err)
-}
+	if err != nil {
+		panic(err)
+	}
 
-var results []testModel
-if err = cursor.All(context.TODO(), &results); err != nil {
-	panic(err)
-}
-println(len(results))
+	var results []testModel
+	if err = cursor.All(context.TODO(), &results); err != nil {
+		panic(err)
+	}
+	println(len(results))
 }
