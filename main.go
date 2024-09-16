@@ -3,20 +3,19 @@ package main
 import (
 	"backend/Router"
 
-	"backend/Service/DB"
+	//"backend/Service/DB"
 
-	"backend/Model/TestModel"
+	//"backend/Model/TestModel"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	DB.Init()
+	//DB.Init()
 	r := gin.Default()
 	Router.MainRoute(r)
-	TestModel.InsirtTestModel("test","test")
-	TestModel.GetAllTestModel()
-	r.Run(":1234")
-	
+	//TestModel.InsirtTestModel("test", "test")
+	//TestModel.GetAllTestModel()
+	r.Run("0.0.0.0:1234")
 
 }

@@ -1,7 +1,7 @@
 FROM golang:latest
 WORKDIR /app
-COPY * ./
+COPY ./ ./
 RUN go mod download
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+RUN go build -o ./programe
 EXPOSE 1234
-CMD ["/docker-gs-ping"]
+CMD ["./programe"]
